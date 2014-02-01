@@ -10,8 +10,8 @@ DEPENDENCIES="python pg_dump git tar pip sudo supervisorctl"
 for d in $DEPENDENCIES ; do
     o="`which $d 2>&1`"
     if [ $? -ne 0 ] ; then
-        echo "Error: required dependency \"$d\" not installed or on PATH:"
-        echo "$o"
+        echo "Error: required dependency \"$d\" not installed or on PATH:" 1>&2
+        echo "$o" 1>&2
         exit 9
     fi
 done
@@ -32,7 +32,7 @@ fi
 cd $APP_PATH && \
 source ../bin/activate 2>/dev/null
 if [ $? -ne 0 ] ; then
-    echo "Error: The parent directory of $APP_PATH is not a virtualenv."
+    echo "Error: The parent directory of $APP_PATH is not a virtualenv." 1>&2
     exit 2
 fi
 
